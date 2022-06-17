@@ -1,0 +1,35 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block head %}
+    {{ super() }}
+{% endblock %}}
+{% block title %}{{ title }}{% endblock %}
+{% block navbar %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="/">Home</a>
+        </div>
+    </nav>
+{% endblock %}
+{% block content %}
+    <div class="container" style="margin:100px auto; ">
+        <form class="form" action="/pogoda" method="POST">
+            <div class="input-group" style="width:200px;">
+            <select class="form-control text-secondary" name="searchCriteria">
+                {% for i in miasta %}
+                    <option>{{i}}</option>
+                {% endfor %}
+            </select>
+                <button type="submit" class="btn btn-outline-primary">Wybierz</button>
+            </div>
+        </form>
+        <h1>Pogoda w {{data.name}} <img src="http://openweathermap.org/img/wn/{{icon}}@2x.png"></h1>
+        <div class="row">
+            <h3>Temperatura: {{ temp }} °C</h3>
+            <h3>Ciśnienie: {{data.main.pressure}} hPa</h3>
+            <h3>Zachmurzenie: {{clouds}}</h3>
+            <h3>Prędkość wiatru: {{wind}} m/s</h3>
+            <h3>Wilgotność: {{humidity}} %</h3>
+        </div>
+    </div>
+{% endblock %}
